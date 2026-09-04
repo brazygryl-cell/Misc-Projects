@@ -593,6 +593,20 @@ body:has(#content:target){
 }
 
 </style>
+
+<script>
+/* Always start from the sealed-letter cover after a reload/revisit. */
+(function () {
+  if (location.hash) {
+    try {
+      history.replaceState(null, document.title, location.pathname + location.search);
+    } catch (e) {
+      location.hash = "";
+    }
+  }
+})();
+</script>
+
 </head>
 <body>
 <div id="fireworks" aria-hidden="true"></div>
@@ -767,14 +781,7 @@ btn.addEventListener('pointerup',(e)=>{
 },{passive:false});
 
 /* If the page loads directly with #content, reveal the card. */
-if(location.hash==='#content'){
-  opened=true;
-  stopCoverParty();
-  cover.classList.add('hidden');
-  coverSky.classList.add('hidden');
-  document.body.classList.add('inside-mode');
-  content.classList.remove('hidden');
-}
+
 </script>
 </body>
 </html>
